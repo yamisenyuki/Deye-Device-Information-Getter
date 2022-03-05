@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deye Device Information Getter</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script src="./js/index.js" defer></script>
+
+</head>
+
+<body>
+  <div id="main">
+
+    <el-row type="flex" justify="center">
+      <el-col :xs="20" :sm="12" :md="8" :lg="8" :xl="6">
+        <div style="margin-top: 30%;">
+          <h1 style="text-align: center;">Deye Device Information Getter</h1>
+        </div>
+      </el-col>
+    </el-row>
+    <transition name="el-fade-in-linear">
+      <div v-show="loginshow" class="transition-box">
+        <el-row type="flex" justify="center">
+          <el-col :xs="20" :sm="12" :md="8" :lg="8" :xl="6">
+            <div style="margin-top: 20%;">
+              <el-card class="box-card">
+                <div slot="header" class="clearfix">
+                  <span>Login Your Deye Account</span>
+                </div>
+                <el-form ref="form" :model="form" label-width="80px" @keyup.enter.native="login">
+                  <el-form-item label="Username">
+                    <el-input v-model="form.username"></el-input>
+                  </el-form-item>
+                  <el-form-item label="Password">
+                    <el-input v-model="form.password" type="password"></el-input>
+                  </el-form-item>
+                  <el-form-item>
+                    <el-button type="primary" @click="login" :loading="logining">Login</el-button>
+                  </el-form-item>
+                </el-form>
+              </el-card>
+              <h5 style="color: #CCCCCC;"><i class="el-icon-info"></i> This site will never save any of your personal
+                information, username,
+                password, etc</h5>
+            </div>
+          </el-col>
+        </el-row>
+      </div>
+    </transition>
+
+    <transition name="el-fade-in-linear">
+      <div v-show="resultshow" class="transition-box">
+        <el-row type="flex" justify="center">
+          <el-col :xs="20" :sm="12" :md="8" :lg="12" :xl="12">
+            <div style="margin-top: 10%;">
+              <el-card class="box-card">
+                <el-descriptions title="MQTT INFO" :column="1" border>
+                  <el-descriptions-item label="MQTT Server Address">{{mqttInfo.mqtthost}}</el-descriptions-item>
+                  <el-descriptions-item label="MQTT Server Port">{{mqttInfo.mqttport}}</el-descriptions-item>
+                  <el-descriptions-item label="MQTT Endpoint">{{mqttInfo.endpoint}}</el-descriptions-item>
+                  <el-descriptions-item label="MQTT Username">{{mqttInfo.loginname}}</el-descriptions-item>
+                  <el-descriptions-item label="MQTT Password">{{mqttInfo.password}}</el-descriptions-item>
+                  <el-descriptions-item label="MQTT clentId">{{mqttInfo.clientid}}</el-descriptions-item>
+                </el-descriptions>
+              </el-card>
+            </div>
+          </el-col>
+        </el-row>
+        <el-row type="flex" justify="center" style="margin-top: 16px;">
+          <el-col :xs="20" :sm="12" :md="8" :lg="12" :xl="12">
+            <el-card class="box-card">
+              <div slot="header" class="clearfix">
+                <span>DEVICE LIST</span>
+              </div>
+              <el-collapse v-model="activeDeviceListName">
+                <el-collapse-item :title="device.device_name" :name="device.device_id" v-for="device in deviceList"
+                  :key="device.device_id">
+                  <el-descriptions :column="1" border>
+                    <el-descriptions-item label="Name">{{device.device_name}}</el-descriptions-item>
+                    <el-descriptions-item label="Device Model">{{device.product_name}}</el-descriptions-item>
+                    <el-descriptions-item label="Device ProduceId">{{device.product_id}}</el-descriptions-item>
+                    <el-descriptions-item label="Device DeviceId">{{device.device_id}}</el-descriptions-item>
+                  </el-descriptions>
+                </el-collapse-item>
+              </el-collapse>
+            </el-card>
+          </el-col>
+        </el-row>
+      </div>
+    </transition>
+    <el-footer style="text-align: center;margin-top: 1%;margin-bottom: 1%;">©
+      Senyuki-Yami. GitHub Repo</el-footer>
+  </div>
+</body>
+
+</html>
