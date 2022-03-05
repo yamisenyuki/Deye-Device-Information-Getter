@@ -13,6 +13,6 @@ Since Deye accounts can only be logged into one device, your Deye app may be log
 * [homebridge-deye](https://github.com/IcesandSora/homebridge-deye)
 
 ## Special Thanks
-Vue - [https://github.com/vuejs/vue](https://github.com/vuejs/vue)
-Element - [https://github.com/ElemeFE/element](https://github.com/ElemeFE/element)
-axios - [https://github.com/axios/axios](https://github.com/axios/axios)
+* Vue - [https://github.com/vuejs/vue](https://github.com/vuejs/vue)
+* Element - [https://github.com/ElemeFE/element](https://github.com/ElemeFE/element)
+* axios - [https://github.com/axios/axios](https://github.com/axios/axios)
