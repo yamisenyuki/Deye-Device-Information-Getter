@@ -18,3 +18,4 @@ Since Deye accounts can only be logged into one device, your Deye app may be log
 * Vue - [https://github.com/vuejs/vue](https://github.com/vuejs/vue)
 * Element - [https://github.com/ElemeFE/element](https://github.com/ElemeFE/element)
 * axios - [https://github.com/axios/axios](https://github.com/axios/axios)
+* superagent - [https://github.com/visionmedia/superagent](https://github.com/visionmedia/superagent)

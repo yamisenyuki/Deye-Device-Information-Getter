@@ -19,44 +19,46 @@ var main = new Vue({
   methods: {
     async login() {
       try {
-        const loginInfo = await axios.post(`${this.baseUrl}v3/enduser/login/`,
-          {
+        const loginInfo = await superagent.post(`${this.baseUrl}v3/enduser/login/`)
+          // .set("User-Agent", "DeyeApp/2.2.9 (iPhone; iOS 15.4.1; Scale/2.00)")
+          .type("form")
+          .send({
             "loginname": this.form.username,
             "password": this.form.password,
-            "appid": "v2.16",
+            "appid": "a774310e-a430-11e7-9d4c-00163e0c1b22",
             "pushtype": "Ali",
-            "extend": "{\"cid\":\"111111122223333\",\"type\":\"0\"}"
+            "extend": "{\"cid\":\"111111122223333\",\"type\":\"1\"}"
           })
-        if (loginInfo.data.meta.code !== 0) {
+        const loginInfoBody = loginInfo.body
+        if (loginInfoBody.meta.code !== 0) {
           console.log(loginInfo);
-          this.$message.error("Login failed, " + JSON.stringify(loginInfo.data.meta.message))
+          this.$message.error("Login failed, " + JSON.stringify(loginInfoBody.meta.message))
           this.logining = false
           return
         } else {
-          this.token = loginInfo.data.data.token
-          this.clientId = loginInfo.data.data.clientid
+          this.token = loginInfoBody.data.token
+          this.clientId = loginInfoBody.data.clientid
         }
 
-        const devicListResult = await axios.get(`${this.baseUrl}v3/enduser/deviceList`, {
-          headers: {
-            'Authorization': `JWT ${this.token}`,
-          }
-        })
-        const deviceListInfo = devicListResult.data
+        const deviceListResult = await superagent.get(`${this.baseUrl}v3/enduser/deviceList/?app=new`)
+          // .set("User-Agent", "DeyeApp/2.2.9 (iPhone; iOS 15.4.1; Scale/2.00)")
+          .set("Authorization", `JWT ${this.token}`)
+
+        const deviceListInfo = deviceListResult.body
         if (deviceListInfo.meta.code !== 0) {
           console.log(loginInfo);
-          this.$message.error("Get Device failed, " + JSON.stringify(loginInfo.data.meta.message))
+          this.$message.error("Get Device failed, " + JSON.stringify(deviceListInfo.meta.message))
           this.logining = false
           return
         } else {
           this.deviceList = deviceListInfo.data
         }
-        const mqttResult = await axios.get(`${this.baseUrl}v3/enduser/mqttInfo`, {
-          headers: {
-            'Authorization': `JWT ${this.token}`,
-          }
-        })
-        const mqttInfo = mqttResult.data
+
+        const mqttResult = await superagent.get(`${this.baseUrl}v3/enduser/mqttInfo/`)
+          // .set("User-Agent", "DeyeApp/2.2.9 (iPhone; iOS 15.4.1; Scale/2.00)")
+          .set("Authorization", `JWT ${this.token}`)
+
+        const mqttInfo = mqttResult.body
         if (mqttInfo.meta.code !== 0) {
           console.log(loginInfo);
           this.$message.error("Get MQTT failed, " + JSON.stringify(loginInfo.data.meta.message))
