@@ -30,8 +30,8 @@ var main = new Vue({
             "extend": "{\"cid\":\"111111122223333\",\"type\":\"1\"}"
           })
         const loginInfoBody = loginInfo.body
+        console.log(loginInfo);
         if (loginInfoBody.meta.code !== 0) {
-          console.log(loginInfo);
           this.$message.error("Login failed, " + JSON.stringify(loginInfoBody.meta.message))
           this.logining = false
           return
@@ -45,8 +45,8 @@ var main = new Vue({
           .set("Authorization", `JWT ${this.token}`)
 
         const deviceListInfo = deviceListResult.body
+        console.log(deviceListInfo);
         if (deviceListInfo.meta.code !== 0) {
-          console.log(loginInfo);
           this.$message.error("Get Device failed, " + JSON.stringify(deviceListInfo.meta.message))
           this.logining = false
           return
@@ -59,9 +59,9 @@ var main = new Vue({
           .set("Authorization", `JWT ${this.token}`)
 
         const mqttInfo = mqttResult.body
+        console.log(mqttInfo);
         if (mqttInfo.meta.code !== 0) {
-          console.log(loginInfo);
-          this.$message.error("Get MQTT failed, " + JSON.stringify(loginInfo.data.meta.message))
+          this.$message.error("Get MQTT failed, " + JSON.stringify(mqttInfo.meta.message))
           this.logining = false
           return
         } else {
