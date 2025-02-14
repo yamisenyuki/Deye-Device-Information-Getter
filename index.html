@@ -71,6 +71,15 @@
 
     <transition name="el-fade-in-linear">
       <div v-show="resultshow" class="transition-box">
+        <el-row  v-if="mqttInfo.isFog" type="flex" justify="center">
+          <el-col :xs="20" :sm="12" :md="8" :lg="12" :xl="12">
+            <el-alert
+                    title="This is a Fog device, it may not be able to get the device list. And the device is not compatible with the homebridge-deye."
+                    type="warning"
+                    show-icon>
+            </el-alert>
+          </el-col>
+          </el-row><
         <el-row type="flex" justify="center">
           <el-col :xs="20" :sm="12" :md="8" :lg="12" :xl="12">
             <div style="margin-top: 10%;">
