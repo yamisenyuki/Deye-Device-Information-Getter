@@ -5,6 +5,12 @@ Link Address: [https://yamisenyuki.github.io/Deye-Device-Information-Getter/](ht
 ## What this repo can do
 You can log in to your Deye account through this website, which will help you access all the device information in your account for accessing platforms such as [Homebrige](https://github.com/homebridge/homebridge), [Home Assistant](https://github.com/home-assistant/core), [Node-RED](https://github.com/node-red), etc.
 
+## About Fog Cloud
+Fog Cloud API is a new Deye APP API.   
+Like DYD-T22A3, DYD-D50A3 etc. devices, they are not compatible with the old Deye API.  
+You can get the information of your devices through this API, but maybe can't get device list.  
+**Fog Cloud API is not compatible with the homebridge-deye plugin.**
+
 ## ⚠️ Cautions
 Since Deye accounts can only be logged into one device, your Deye app may be logged out. Just get the information you need and log back into the app.
 
